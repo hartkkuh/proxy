@@ -20,8 +20,8 @@ class Browser:
         return self.page.screenshot()
 
 
-    def click(self, locator, timeout=60000):
-        self.page.locator(locator).click(timeout=timeout)
+    def click(self, url, timeout=60000):
+        self.page.locator(url).click(timeout=timeout)
 
 _local = threading.local()
 
