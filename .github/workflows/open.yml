@@ -2,12 +2,7 @@ name: Open URL
 
 on:
   repository_dispatch:
-  typse:["open"]
-    inputs:
-      url:
-        description: "URL to open"
-        required: true
-        type: string
+    types: ["open"]
 
 jobs:
   open:
@@ -18,4 +13,4 @@ jobs:
         run: |
           curl -X POST "https://proxy-1-2d08.onrender.com/open" \
           -H "Content-Type: application/json" \
-          -d '{"url":"${{ github.event.inputs.url }}"}'
+          -d '{"url":"${{ github.event.client_payload.url }}"}'

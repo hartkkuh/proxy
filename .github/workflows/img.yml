@@ -2,7 +2,7 @@ name: Get Image
 
 on:
   repository_dispatch:
-  types:["img"]
+    types: ["img"]
 
 jobs:
   img:
