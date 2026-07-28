@@ -29,5 +29,19 @@ def img():
         return jsonify({"error": f"Timeout loading image"}), 504
     return Response(image, mimetype="image/png")
 
+
+@app.route("/click", methods=["POST"])
+def click():
+    data = request.get_json(silent=True) or {}
+    url = data.get("url")
+    if not url:
+        return jsonify({"error": "Locator is required"}), 400
+    browser = get_browser()
+    try:
+        browser.click(url)
+    except PlaywrightTimeoutError:
+        return jsonify({"error": f"Timeout loading {url}"}), 504
+    return jsonify({"success": True})
+
 if __name__ == "__main__":
     app.run(debug=True, threaded=True)

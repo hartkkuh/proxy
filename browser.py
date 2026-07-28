@@ -16,12 +16,12 @@ class Browser:
         except Exception:
             pass
 
-    def text(self):
-        return self.page.locator("body").inner_text()
-
     def img(self):
         return self.page.screenshot()
 
+
+    def click(self, locator, timeout=60000):
+        self.page.locator(locator).click(timeout=timeout)
 
 _local = threading.local()
 
