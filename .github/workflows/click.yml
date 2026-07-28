@@ -4,8 +4,8 @@ on:
   repository_dispatch:
     types: ["click"]
     inputs:
-      url:
-        description: "URL to click on"
+      locator:
+        description: "Locator to click on"
         required: true
         type: string
 
@@ -18,4 +18,4 @@ jobs:
         run: |
           curl -X POST "https://proxy-1-2d08.onrender.com/click" \
           -H "Content-Type: application/json" \
-          -d "{"url":\"${{ github.event.inputs.url }}\"}"
+          -d "{"locator":\"${{ github.event.inputs.locator }}\"}"

@@ -33,15 +33,15 @@ def img():
 @app.route("/click", methods=["POST"])
 def click():
     data = request.get_json(silent=True) or {}
-    url = data.get("url")
-    if not url:
+    locator = data.get("locator")
+    if not locator:
         return jsonify({"error": "Locator is required"}), 400
     browser = get_browser()
     try:
-        browser.click(url)
+        browser.click(locator, timeout=10000)
     except PlaywrightTimeoutError:
-        return jsonify({"error": f"Timeout loading {url}"}), 504
-    return jsonify({"success": True})
+        return jsonify({"error": f"Timeout loading {locator}"}), 504
+    return jsonify({"success": True})    
 
 if __name__ == "__main__":
     app.run(debug=True, threaded=True)
