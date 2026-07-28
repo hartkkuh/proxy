@@ -15,6 +15,6 @@ jobs:
     steps:
       - name: Send URL to proxy
         run: |
-          curl -X POST "https://proxy-v4g5.onrender.com/open" \
+          curl -X POST "https://proxy-1-2d08.onrender.com/open" \
             -H "Content-Type: application/json" \
             -d "{\"url\":\"${{ github.event.inputs.url }}\"}"
