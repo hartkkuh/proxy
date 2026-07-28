@@ -3,11 +3,11 @@ name: Close Browser
 on:
   repository_dispatch:
 
-  jobs:
-    close:
-      runs-on: ubuntu-latest
+jobs:
+  close:
+    runs-on: ubuntu-latest
 
-      steps:
-        - name: Close Browser
-          run: |
-            curl -X GET "https://proxy-1-2d08.onrender.com/close"
+    steps:
+      - name: Close Browser
+        run: |
+          curl -X GET "https://proxy-1-2d08.onrender.com/close"

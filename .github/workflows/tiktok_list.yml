@@ -4,12 +4,17 @@ on:
   repository_dispatch:
     types: [tiktok_list]
 
-  jobs:
-    tiktok_list:
-      runs-on: ubuntu-latest
+jobs:
+  tiktok_list:
+    runs-on: ubuntu-latest
 
-      steps:
-        - name: TikTok List
-          run: |
-            curl -X GET http://localhost:5000/tiktok_list
-            echo "TikTok List: ${{ steps.tiktok_list.outputs.videos }}"
+    steps:
+      - name: TikTok List
+        id: tiktok_list
+        run: |
+          RESPONSE=$(curl -s "https://proxy-1-2d08.onrender.com/tiktok_list")
+          echo "videos=$RESPONSE" >> $GITHUB_OUTPUT
+
+      - name: Show result
+        run: |
+          echo "TikTok List: ${{ steps.tiktok_list.outputs.videos }}"
