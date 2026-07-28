@@ -1,0 +1,20 @@
+name: Open URL
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "URL to open"
+        required: true
+        type: string
+
+jobs:
+  open:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send URL to proxy
+        run: |
+          curl -X POST "https://proxy-v4g5.onrender.com/open" \
+            -H "Content-Type: application/json" \
+            -d "{\"url\":\"${{ github.event.inputs.url }}\"}"
