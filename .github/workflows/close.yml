@@ -2,6 +2,7 @@ name: Close Browser
 
 on:
   repository_dispatch:
+    types: ["close"]
 
 jobs:
   close:
