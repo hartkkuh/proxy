@@ -1,21 +1,16 @@
-name: Get Image
+name: Click
 
 on:
   repository_dispatch:
     types: ["click"]
-    inputs:
-      locator:
-        description: "Locator to click on"
-        required: true
-        type: string
 
 jobs:
   click:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Click on URL
+      - name: Click on element
         run: |
           curl -X POST "https://proxy-1-2d08.onrender.com/click" \
           -H "Content-Type: application/json" \
-          -d "{"locator":\"${{ github.event.inputs.locator }}\"}"
+          -d '{"locator":"${{ github.event.client_payload.locator }}"}'
