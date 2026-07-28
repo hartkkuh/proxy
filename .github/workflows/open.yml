@@ -1,7 +1,8 @@
 name: Open URL
 
 on:
-  workflow_dispatch:
+  repository_dispatch:
+  typse:["open"]
     inputs:
       url:
         description: "URL to open"
@@ -13,15 +14,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get screenshot
+      - name: Open URL
         run: |
           curl -X POST "https://proxy-1-2d08.onrender.com/open" \
           -H "Content-Type: application/json" \
-          -d '{"url":"${{ github.event.inputs.url }}"}' \
-          -o screenshot.png
-
-      - name: Upload screenshot
-        uses: actions/upload-artifact@v4
-        with:
-          name: screenshot
-          path: screenshot.png
+          -d '{"url":"${{ github.event.inputs.url }}"}'

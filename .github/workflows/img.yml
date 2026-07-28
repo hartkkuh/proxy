@@ -1,0 +1,21 @@
+name: Get Image
+
+on:
+  repository_dispatch:
+  types:["img"]
+
+jobs:
+  img:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get Image
+        run: |
+          curl -X GET "https://proxy-1-2d08.onrender.com/img" \
+          -o image.png
+
+      - name: Upload Image
+        uses: actions/upload-artifact@v4
+        with:
+          name: image
+          path: image.png

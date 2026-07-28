@@ -16,12 +16,18 @@ def home():
     browser = get_browser()
     try:
         browser.open(url)
+        return jsonify({"success": True})
     except PlaywrightTimeoutError:
         return jsonify({"error": f"Timeout loading {url}"}), 504
 
-    image = browser.img()
+@app.route("/img", methods=["GET"])
+def img():
+    browser = get_browser()
+    try:
+        image = browser.img()
+    except PlaywrightTimeoutError:
+        return jsonify({"error": f"Timeout loading image"}), 504
     return Response(image, mimetype="image/png")
-
 
 if __name__ == "__main__":
     app.run(debug=True, threaded=True)
