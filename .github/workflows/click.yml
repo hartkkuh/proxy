@@ -1,0 +1,21 @@
+name: Get Image
+
+on:
+  repository_dispatch:
+    types: ["click"]
+    inputs:
+      url:
+        description: "URL to click on"
+        required: true
+        type: string
+
+jobs:
+  click:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Click on URL
+        run: |
+          curl -X POST "https://proxy-1-2d08.onrender.com/click" \
+          -H "Content-Type: application/json" \
+          -d "{\"url\":\"${{ github.event.inputs.url }}\"}"
