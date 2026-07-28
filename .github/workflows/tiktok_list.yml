@@ -1,0 +1,15 @@
+name: TikTok List
+
+on:
+  repository_dispatch:
+    types: [tiktok_list]
+
+  jobs:
+    tiktok_list:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: TikTok List
+          run: |
+            curl -X GET http://localhost:5000/tiktok_list
+            echo "TikTok List: ${{ steps.tiktok_list.outputs.videos }}"

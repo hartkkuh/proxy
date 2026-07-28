@@ -52,5 +52,16 @@ def close():
         return jsonify({"error": f"Timeout closing browser"}), 504
     return jsonify({"success": True})
 
+
+@app.route("/tiktok_list", methods=["GET"])
+def tiktok_list():
+    browser = get_browser()
+    try:
+        videos = browser.tiktok_list()
+        return jsonify({"success": True, "videos": videos})
+    except PlaywrightTimeoutError:
+        return jsonify({"error": f"Timeout loading tiktok list"}), 504
+
+
 if __name__ == "__main__":
     app.run(debug=True, threaded=True)

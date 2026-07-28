@@ -28,6 +28,16 @@ class Browser:
         self.browser.close()
         self.p.stop()
 
+    def tiktok_list(self):
+        self.videos = self.page.locator('a[href*="/video/"]')
+
+        count = self.videos.count()
+
+        for i in range(count):
+            href = self.videos.nth(i).get_attribute("href")
+            print(i, href)
+        return self.videos
+
 _local = threading.local()
 
 
