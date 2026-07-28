@@ -43,5 +43,14 @@ def click():
         return jsonify({"error": f"Timeout loading {locator}"}), 504
     return jsonify({"success": True})    
 
+@app.route("/close", methods=["GET"])
+def close():
+    browser = get_browser()
+    try:
+        browser.close()
+    except PlaywrightTimeoutError:
+        return jsonify({"error": f"Timeout closing browser"}), 504
+    return jsonify({"success": True})
+
 if __name__ == "__main__":
     app.run(debug=True, threaded=True)

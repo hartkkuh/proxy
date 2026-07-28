@@ -25,6 +25,11 @@ class Browser:
     def click(self, url, timeout=60000):
         self.page.locator(url).click(timeout=timeout)
 
+    def close(self):
+        self.page.close()
+        self.browser.close()
+        self.p.stop()
+
 _local = threading.local()
 
 
